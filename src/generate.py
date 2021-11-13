@@ -67,7 +67,7 @@ if __name__ == "__main__":
     n = int(sys.argv[1])
     k = int(sys.argv[2])
     file_name = sys.argv[3]
-    dict_stud, dict_univ = generate_pref(n,k)
+    dict_stud, dict_univ = generate_pref(n,k,rand_capacities=False)
     with open(file_name, 'w') as outfile:
         json.dump({'students' : dict_stud, 'institutions':dict_univ}, outfile)
     
