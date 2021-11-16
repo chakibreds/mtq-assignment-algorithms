@@ -1,0 +1,21 @@
+{
+    "students": {
+        "E1": ["I3", "I1", "I2"],
+        "E2": ["I1", "I2", "I3"],
+        "E3": ["I3", "I2", "I1"]
+    },
+    "institutions": {
+        "I1": {
+            "capacities": 1,
+            "preferences": ["E1", "E2", "E3"]
+        },
+        "I2": {
+            "capacities": 1,
+            "preferences": ["E1", "E3", "E2"]
+        },
+        "I3": {
+            "capacities": 1,
+            "preferences": ["E3", "E2", "E1"]
+        }
+    }
+}

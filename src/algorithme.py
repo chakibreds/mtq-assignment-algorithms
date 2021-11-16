@@ -1,8 +1,8 @@
 import sys, json
 
 # Algorithme de mariage stable de Gale & Shapley
-# @param data : studients and institutions prefrences (id, liste de préférences)
-def GaleShapley(data):
+# @param data : studients and institutions preferences (id, liste de préférences)
+def galeShapley(data):
     libre = [k for k in data['students'].keys()]
     
     prochain = {}
@@ -41,3 +41,12 @@ def GaleShapley(data):
         prochain[s] += 1
     return affectation
 
+# print the affectation in a human-readable format
+def printAffectation(affectation):
+    for i in affectation:
+        print("Institution " + i + " : " + str(affectation[i]))
+
+# calculate satisfaction of the affectation
+def satisfaction(affectation, data):
+    s = 0
+    return s

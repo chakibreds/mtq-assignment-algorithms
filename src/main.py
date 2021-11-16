@@ -1,12 +1,20 @@
-from algorithme import GaleShapley
-import json
+from algorithme import galeShapley, printAffectation, satisfaction
+import json, sys
 
 if __name__ == "__main__":
-    file_name = 'data/medium_preferences.json'
+    if len(sys.argv) != 2:
+        print("Usage: python main.py <preferences.json>")
+        exit(1)
+    
+    file_name = sys.argv[1]
 
+    # load data
     with open(file_name) as file:
         data = json.load(file)
 
-    #print(data)
-    gs = GaleShapley(data)
-    print(gs)
+    affectation = galeShapley(data)
+
+    print("Institutions : [Étudiants affectés]")
+    printAffectation(affectation)
+
+    print(f"Satisfaction des étudiants : {satisfaction(affectation,data)}")
