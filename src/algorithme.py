@@ -41,6 +41,54 @@ def galeShapley(data):
         prochain[s] += 1
     return affectation
 
+
+
+def galeShapley2(data):
+    libreI = [k for k in data['institutions'].keys()]
+    prochainE = {}
+    dejAffect = {}
+    for insti in data['institutions'].keys():
+        prochainE[insti] = 0
+        dejAffect[insti] = 0
+    affectation = {}
+    for e in data['students']:
+        affectation[e] = []
+
+    while len(libreI) > 0 :
+        i = libreI[0]
+        #print(i)
+        cap = data['institutions'][i]['capacities'] - dejAffect[i]
+        #print(cap)
+        #print(data['institutions'][i]['preferences'])
+        while cap > 0: 
+            if (len(data['institutions'][i]['preferences']) > prochainE[i]) : 
+                e = data['institutions'][i]['preferences'][prochainE[i]]
+                if (affectation[e]):
+                    acctuI = affectation[e][0]
+                    if (data['students'][e].index(i) < data['students'][e].index(acctuI)):
+                        affectation[e].remove(acctuI)
+                        dejAffect[acctuI] -= 1
+                        affectation[e].append(i)
+                        cap -= 1
+                        dejAffect[i] += 1
+                        libreI.append(acctuI)
+                else : 
+                    affectation[e].append(i)
+                    cap -= 1
+                    dejAffect[i] += 1
+
+                prochainE[i] += 1
+            else : 
+                prochainE[i] = 0
+        
+        libreI.remove(i)
+
+    return affectation
+
+
+
+
+
 # print the affectation in a human-readable format
 def printAffectation(affectation):
     for i in affectation:

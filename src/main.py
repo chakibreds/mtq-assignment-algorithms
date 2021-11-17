@@ -1,4 +1,4 @@
-from algorithme import galeShapley, printAffectation, satisfaction
+from algorithme import galeShapley, galeShapley2,  printAffectation, satisfaction
 import json, sys
 
 if __name__ == "__main__":
@@ -12,9 +12,10 @@ if __name__ == "__main__":
     with open(file_name) as file:
         data = json.load(file)
 
-    affectation = galeShapley(data)
+    affectation = galeShapley2(data)
+    print(affectation)
 
-    print("Institutions : [Étudiants affectés]")
+    """ print("Institutions : [Étudiants affectés]")
     printAffectation(affectation)
 
-    print(f"Satisfaction des étudiants : {satisfaction(affectation,data)}")
+    print(f"Satisfaction des étudiants : {satisfaction(affectation,data)}") """
