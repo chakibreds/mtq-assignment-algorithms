@@ -30,33 +30,37 @@ def generate_capacities(n, k):
 def generate_pref(n,k,rand_capacities=True): 
     dict_stud={}
     dict_univ={}
+
     if rand_capacities:
         capacities = generate_capacities(n, k)
     else:
-        capacities = [int(n/k)+1]*k
+        capacities = [round(int(n/k)) + 1 for i in range(k)]
+
+    for i in range(k):
+        dict_univ["I"+str(i+1)]= {'capacities': capacities[i], 'preferences' : []}
+
+
     # students preferences
     i = 1
     while (i<=n): 
         dict_stud["E"+str(i)] = []
-        j = 1 
-        while (j<=k):
-            choice = "I"+str(random.randrange(1,k+1,1))
-            if choice not in dict_stud["E"+str(i)]: 
-                dict_stud["E"+str(i)].append(choice)
-                j+=1
-        i+=1
+        inst = list(dict_univ.keys())
 
-    # institutions preferences
-    i = 1 
-    while(i<=k):
-        dict_univ["I"+str(i)] = {'capacities': capacities[i-1], 'preferences' : []}
-        j = 1 
-        while (j<=n):
-            choice = "E"+str(random.randrange(1,n+1,1))
-            if choice not in dict_univ["I"+str(i)]['preferences']: 
-                dict_univ["I"+str(i)]['preferences'].append(choice)
-                j+=1
+        while len(inst) > 0:
+            choice = random.choice(inst)
+            inst.remove(choice)
+            dict_stud["E"+str(i)].append(choice)
         i+=1
+    # institutions preferences
+    i = 1
+    while(i<=k):
+        students = list(dict_stud.keys())
+        while len(students) > 0:
+            choice = random.choice(students)
+            students.remove(choice)
+            dict_univ["I"+str(i)]['preferences'].append(choice)
+        i+=1
+    
     return dict_stud,dict_univ
 
 if __name__ == "__main__":

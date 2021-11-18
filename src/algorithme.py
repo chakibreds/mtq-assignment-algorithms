@@ -2,7 +2,7 @@ import sys, json
 
 # Algorithme de mariage stable de Gale & Shapley
 # @param data : studients and institutions preferences (id, liste de préférences)
-def galeShapley(data):
+def galeShapleyStudents(data):
     libre = [k for k in data['students'].keys()]
     
     prochain = {}
@@ -15,14 +15,10 @@ def galeShapley(data):
     
     while len(libre) > 0:
         s = libre[0]
-        k1 = data['students']
-        k2 = k1[s]
-        k3 = prochain[s]
-        k4 = k2[k3]
-        i = k4
-
-        # i = data['students'][s][prochain[s]]
-
+        i = data['students'][s][prochain[s]]
+        if int(data['institutions'][i]['capacities']) == 0 :
+            prochain[s] += 1
+            continue
         if (len(affectation[i]) < int(data['institutions'][i]['capacities'])):
             affectation[i].append(s)
             libre.remove(s)
@@ -42,15 +38,15 @@ def galeShapley(data):
     return affectation
 
 
-
-def galeShapley2(data):
+def galeShapleyInstituts(data):
     libreI = [k for k in data['institutions'].keys()]
     prochainE = {}
-    #dejAffect = {}
+
     for insti in data['institutions'].keys():
         prochainE[insti] = 0
-        #dejAffect[insti] = 0
+
     affectation = {}
+
     for i in data['institutions']:
         affectation[i] = []
 
@@ -71,6 +67,8 @@ def galeShapley2(data):
                 else : 
                     affectation[i].append(e)
                 prochainE[i] += 1
+            else:
+                break
         
         libreI.remove(i)
 
@@ -102,18 +100,21 @@ def institutionSatisfaction(affectation, data):
         sat_inst = 0
         # calculer pour chaque institution la satisfaction de l'institut
         capacity = data['institutions'][institution]['capacities']
-        for student in affectation[institution] :
-            index = data['institutions'][institution]['preferences'].index(student)
-            if nb_students > 2 * capacity:
-                if index < capacity:
-                    sat_inst += 1
-                elif index < nb_students - capacity - 1:
-                    pas = 1 / (nb_students - 2 * capacity - 1)
-                    sat_inst += 1 - ((index - capacity + 1) * pas)
-            else:
-                if index < capacity:
-                    sat_inst += 1
-        sat += sat_inst / capacity
+        if capacity == 0:
+            sat_inst = 1
+        else:
+            for student in affectation[institution] :
+                index = data['institutions'][institution]['preferences'].index(student)
+                if nb_students > 2 * capacity:
+                    if index < capacity:
+                        sat_inst += 1
+                    elif index < nb_students - capacity - 1:
+                        pas = 1 / (nb_students - 2 * capacity - 1)
+                        sat_inst += 1 - ((index - capacity + 1) * pas)
+                else:
+                    if index < capacity:
+                        sat_inst += 1
+            sat += sat_inst / capacity
 
 
     return round(sat / len(data['institutions']), 2)
