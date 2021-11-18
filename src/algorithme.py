@@ -76,16 +76,44 @@ def galeShapley2(data):
 
     return affectation
 
-
-
-
-
 # print the affectation in a human-readable format
 def printAffectation(affectation):
+    print("Institutions : [Étudiants affectés]")
+
     for i in affectation:
         print("Institution " + i + " : " + str(affectation[i]))
 
 # calculate satisfaction of the affectation
-def satisfaction(affectation, data):
+def studentSatisfaction(affectation, data):
     s = 0
-    return s
+    nb_institutions = len(data['institutions'])
+    for institution in affectation :
+        for student in affectation[institution] :
+            if nb_institutions == 1:
+                s += 1
+            else:
+                s += 1 - (data['students'][student].index(institution) / (nb_institutions - 1))
+    return round(s / len(data['students']), 2)
+
+def institutionSatisfaction(affectation, data):
+    sat = 0
+    nb_students = len(data['students'])
+    for institution in affectation :
+        sat_inst = 0
+        # calculer pour chaque institution la satisfaction de l'institut
+        capacity = data['institutions'][institution]['capacities']
+        for student in affectation[institution] :
+            index = data['institutions'][institution]['preferences'].index(student)
+            if nb_students > 2 * capacity:
+                if index < capacity:
+                    sat_inst += 1
+                elif index < nb_students - capacity - 1:
+                    pas = 1 / (nb_students - 2 * capacity - 1)
+                    sat_inst += 1 - ((index - capacity + 1) * pas)
+            else:
+                if index < capacity:
+                    sat_inst += 1
+        sat += sat_inst / capacity
+
+
+    return round(sat / len(data['institutions']), 2)
