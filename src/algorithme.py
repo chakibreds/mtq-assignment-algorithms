@@ -77,9 +77,32 @@ def galeShapleyInstituts(data):
 # print the affectation in a human-readable format
 def printAffectation(affectation):
     print("Institutions : [Étudiants affectés]")
-
     for i in affectation:
         print("Institution " + i + " : " + str(affectation[i]))
+
+# write affection in a json file
+def writeAffectation(affectation, filename, format='json'):
+    if (format == 'json'):
+        with open(filename, 'w') as outfile:
+            json.dump(affectation, outfile)
+    elif (format == 'csv'):
+        with open(filename, 'w') as outfile:
+            for i in affectation:
+                for s in affectation[i]:
+                    outfile.write(s + ";" + i + "\n")
+    else:
+        print(f"Format '{format}' inconnu")
+
+# draw graph from csv file using networkx
+def drawGraph(filename):
+    import networkx as nx
+    import matplotlib.pyplot as plt
+
+    G = nx.read_edgelist(filename, delimiter=';', create_using=nx.Graph(), nodetype=str)
+    pos = nx.spring_layout(G)
+    nx.draw(G, pos, with_labels=True, node_size=1000, font_size=8)
+    plt.show()
+
 
 # calculate satisfaction of the affectation
 def studentSatisfaction(affectation, data):

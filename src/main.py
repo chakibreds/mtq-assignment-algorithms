@@ -12,11 +12,15 @@ if __name__ == "__main__":
     with open(file_name) as file:
         data = json.load(file)
 
+    filename = "output/result.csv"
+
     affectationStudents = []#galeShapleyStudents(data)
     affectationInstituts = galeShapleyInstituts(data)
 
     print("Affectation priorité aux étudiants :")
-    printAffectation(affectationStudents)
+    writeAffectation(affectationInstituts, filename, format='csv')
+
+    drawGraph(filename)
 
     print("\nPriorité aux étudiants : ")
     print(f"Satisfaction des étudiants : {studentSatisfaction(affectationStudents,data)}")
