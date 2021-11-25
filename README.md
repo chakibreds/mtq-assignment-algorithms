@@ -12,6 +12,15 @@ Le but de ce projet est de faire une analyse critique de l’algorithme du maria
 - [ ]  Ordonner les deux versions de l'algorithme selon l'ordre décroissant de satisfaction globale des étudiants
 - [ ]  Proposer une extension du système pour intègrer les représentations compactes des préférences
 
+## Installation
+
+### Visualisation des graphes
+
+```shell
+sudo apt-get install graphviz graphviz-dev
+pip install pygraphviz
+```
+
 ## Rendus
 
 Data lilmite : 1 Octobre 2021

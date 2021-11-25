@@ -92,17 +92,8 @@ def writeAffectation(affectation, filename, format='json'):
                     outfile.write(s + ";" + i + "\n")
     else:
         print(f"Format '{format}' inconnu")
-
-# draw graph from csv file using networkx
-def drawGraph(filename):
-    import networkx as nx
-    import matplotlib.pyplot as plt
-
-    G = nx.read_edgelist(filename, delimiter=';', create_using=nx.Graph(), nodetype=str)
-    pos = nx.spring_layout(G)
-    nx.draw(G, pos, with_labels=True, node_size=1000, font_size=8)
-    plt.show()
-
+        pass
+    print(f"Affectation écrite dans '{filename}'")
 
 # calculate satisfaction of the affectation
 def studentSatisfaction(affectation, data):

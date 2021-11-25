@@ -1,34 +1,38 @@
 from algorithme import *
-import json, sys
+import json, sys, time
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python main.py <preferences.json>")
+    if len(sys.argv) != 3:
+        print("Usage: python main.py <preferences.json> <output/dir/>")
         exit(1)
     
     file_name = sys.argv[1]
+    output_dir = sys.argv[2]
+    if output_dir[-1] != '/':
+        output_dir += '/'
 
     # load data
     with open(file_name) as file:
         data = json.load(file)
 
-    filename = "output/result.csv"
-
-    affectationStudents = []#galeShapleyStudents(data)
+    start = time.time()
+    affectationStudents = galeShapleyStudents(data)
+    end = time.time()
     affectationInstituts = galeShapleyInstituts(data)
+    end_two = time.time()
 
-    print("Affectation priorité aux étudiants :")
-    writeAffectation(affectationInstituts, filename, format='csv')
+    print(f"Temps d'execution Gale Shapley - priorité aux étudiants: {round(end - start,3)} ms.")
+    print(f"Temps d'execution Gale Shapley - priorité aux instituts: {round(end_two - end, 3)} ms.")
 
-    drawGraph(filename)
+    filename = output_dir + file_name.split('/')[-1].split('.')[0] + "_student" + ".json"
+    writeAffectation(affectationStudents, filename, format=filename.split('.')[-1])
+    filename = output_dir + file_name.split('/')[-1].split('.')[0] + "_institut" + ".json"
+    writeAffectation(affectationInstituts, filename, format=filename.split('.')[-1])
 
     print("\nPriorité aux étudiants : ")
-    print(f"Satisfaction des étudiants : {studentSatisfaction(affectationStudents,data)}")
-    print(f"Satisfaction des instituts : {institutionSatisfaction(affectationStudents,data)}")
-
-    print("\nAffectation priorité aux institutions :")
-    printAffectation(affectationInstituts)
+    print(f"\tSatisfaction des étudiants : {studentSatisfaction(affectationStudents,data)}")
+    print(f"\tSatisfaction des instituts : {institutionSatisfaction(affectationStudents,data)}")
 
     print("\nPriorité aux institutions : ")
-    print(f"Satisfaction des étudiants : {studentSatisfaction(affectationInstituts,data)}")
-    print(f"Satisfaction des instituts : {institutionSatisfaction(affectationInstituts,data)}")
+    print(f"\tSatisfaction des étudiants : {studentSatisfaction(affectationInstituts,data)}")
+    print(f"\tSatisfaction des instituts : {institutionSatisfaction(affectationInstituts,data)}")
