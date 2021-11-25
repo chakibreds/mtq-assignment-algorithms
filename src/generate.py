@@ -1,5 +1,5 @@
 import sys,random,json
-
+import time
 import numpy as np
 
 # @param n nb students
@@ -71,9 +71,16 @@ if __name__ == "__main__":
     n = int(sys.argv[1])
     k = int(sys.argv[2])
     file_name = sys.argv[3]
+    start = time.time()
     dict_stud, dict_univ = generate_pref(n,k,rand_capacities=True)
+    end = time.time()
+
+    print(f"Generation des préferences en {round(start-end,2)} secondes.")
+
     with open(file_name, 'w') as outfile:
+        start = time.time()
         json.dump({'students' : dict_stud, 'institutions':dict_univ}, outfile)
+        end = time.time()
     
-    print(f"File '{file_name}' generated.")
+    print(f"File '{file_name}' generated.\ntime = {round(start-end,2)} secondes.")
 

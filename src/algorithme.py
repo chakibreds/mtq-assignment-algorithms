@@ -96,15 +96,26 @@ def writeAffectation(affectation, filename, format='json'):
     print(f"Affectation écrite dans '{filename}'")
 
 # calculate satisfaction of the affectation
-def studentSatisfaction(affectation, data):
+def studentSatisfaction(affectation, data,fonction='linear'):
     s = 0
     nb_institutions = len(data['institutions'])
+    somme_pi = [0]
+    for i in range(1,nb_institutions+1,1):
+        somme_pi.append(somme_pi[-1] + (2*(nb_institutions-i)/((nb_institutions*nb_institutions)-nb_institutions)))
+        
     for institution in affectation :
         for student in affectation[institution] :
             if nb_institutions == 1:
                 s += 1
             else:
-                s += 1 - (data['students'][student].index(institution) / (nb_institutions - 1))
+                if (fonction=='linear'):
+                    s += 1 - (data['students'][student].index(institution) / (nb_institutions - 1))
+                elif(fonction=='poly'):
+                    s += 1 - (somme_pi[data['students'][student].index(institution)])
+                elif(fonction=='inverse'):
+                    s += (1 / (data['students'][student].index(institution) + 1))
+
+
     return round(s / len(data['students']), 2)
 
 def institutionSatisfaction(affectation, data):

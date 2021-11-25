@@ -21,8 +21,8 @@ if __name__ == "__main__":
     affectationInstituts = galeShapleyInstituts(data)
     end_two = time.time()
 
-    print(f"Temps d'execution Gale Shapley - priorité aux étudiants: {round(end - start,3)} ms.")
-    print(f"Temps d'execution Gale Shapley - priorité aux instituts: {round(end_two - end, 3)} ms.")
+    print(f"Temps d'execution Gale Shapley - priorité aux étudiants: {round(end - start,3)} secondes.")
+    print(f"Temps d'execution Gale Shapley - priorité aux instituts: {round(end_two - end, 3)} secondes.")
 
     filename = output_dir + file_name.split('/')[-1].split('.')[0] + "_student" + ".json"
     writeAffectation(affectationStudents, filename, format=filename.split('.')[-1])
@@ -30,9 +30,11 @@ if __name__ == "__main__":
     writeAffectation(affectationInstituts, filename, format=filename.split('.')[-1])
 
     print("\nPriorité aux étudiants : ")
-    print(f"\tSatisfaction des étudiants : {studentSatisfaction(affectationStudents,data)}")
+    for fonction in ['linear', 'poly', 'inverse']:
+        print(f"\tSatisfaction '{fonction}' des étudiants : {studentSatisfaction(affectationStudents,data,fonction)}")
     print(f"\tSatisfaction des instituts : {institutionSatisfaction(affectationStudents,data)}")
 
     print("\nPriorité aux institutions : ")
-    print(f"\tSatisfaction des étudiants : {studentSatisfaction(affectationInstituts,data)}")
+    for fonction in ['linear', 'poly', 'inverse']:
+        print(f"\tSatisfaction '{fonction}' des étudiants : {studentSatisfaction(affectationInstituts,data,fonction)}")
     print(f"\tSatisfaction des instituts : {institutionSatisfaction(affectationInstituts,data)}")
