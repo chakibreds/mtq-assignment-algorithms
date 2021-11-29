@@ -1,0 +1,195 @@
+\documentclass[12pt,titlepage]{article}
+
+\usepackage{float}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+% Bout de code
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{grey}{rgb}{0.27,0.27,0.27}
+
+\lstset{
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  firstnumber=0,                   % start line enumeration with line 1000
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{mygreen},       % keyword style
+  %language=C++,                    % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  %rulecolor=\color{white},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {Ã}{{\~A}}1 {ã}{{\~a}}1 {Õ}{{\~O}}1 {õ}{{\~o}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+}
+
+\begin{document}
+
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\center
+\textsc{\LARGE
+Université de Montpellier
+} \\[1cm]
+\begin{figure}[h]
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\includegraphics[width=1\textwidth]{img/fds.png}
+	\end{minipage}
+	\hfill%
+	\begin{minipage}[c]{.46\linewidth}
+		\centering
+		\includegraphics[width=1\textwidth]{img/univ-montpellier.png}
+	\end{minipage}
+\end{figure}
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Rapport du projet \\Conception et
+implantation d’un système d’aide
+à la décision }
+\HRule \\[1.5cm]
+El Houiti Chakib \\
+Kezzoul Massili
+\\[1cm]
+\today \\ [1cm]
+\end{titlepage}
+
+\section*{Introduction}
+
+
+\subsection*{Objectif du projet}
+L'objectif principal du projet est de réaliser une analyse critique de l'algorithme du mariage stable. Dans un premier temps l'objectif est d'implémenter l'algorithme de Gale et Shapley (mariage stable), pour l'affectation des étudiants aux institus, ensuite, de proposer une méthode de satisfaction pour les deux côtés et de tester, cet algorithme sur plusieurs jeux de données. Finalement, c'est de proposer une représentation compacte des préférences. 
+
+
+\subsection*{Environnement de développement}
+Le projet a été développé sur notre propre environnement de travail. On a utilisé le langage Python, pour l'implémentation des différentes fonctionnalités, en utilisant plusieurs bibliothèques propres à Python. 
+
+
+\subsection*{Structure du projet}
+Pour une meilleure compréhension de l’environnement du projet, voici ci-dessous différentes infor-
+mations sur les différents fichiers et répertoires du projet. 
+
+\begin{description}
+	\item[\textit{src/}] Répertoire contenant les fichiers sources du projet.
+	\begin{description}
+    \item[\textbf{generate.py}] Fichier pour la génération de jeux de données.
+    \item[\textbf{algorithme.py}] Fichier implémentant les différents algorithmes.
+    \item[\textbf{graphviz.py}] Fichier de visualisation.
+    \item[\textbf{main.py}] Fichier main du système. 
+  \end{description} 
+	\item[\textit{data/}] Répertoire contenant les différents jeux de données.
+	\begin{description}
+		\item[Jeu de données] Les \textit{fichiers.json} contiennent les données au format JSON
+	\end{description}
+		\item[\textit{output/}] Répertoire contenant toutes les sorties du programme.	
+		\item[\textit{README.md}] Fichier expliquant la manière d'utiliser le programme (initialisation, compilation et exécution). Referez-vous à la section \textit{Utilisation} de ce dernier pour plus d'informations.
+		\item[\textit{Makefile}] Fichier qui spécifient les commandes de compilation, initialisation et autres.
+\end{description}
+
+
+\section{Modèlisation et implémentation}
+
+\subsection{Programme de génération de préférences aléatoires}
+Cette Partie est faite pour la génération aléatoires des préférences des étudiants et des instituts. Pour cela, on a réaliser une méthode prenant \textbf{n} étudiants et \textbf{k} instituts, qui permet de générer \textbf{n} étudiant avec \textbf{k} préférences d'instituts pour chaque étudiant, qui seront stockés dans un fichier \textit{json}, pour avoir la possibilité de générer plusieurs jeux de données. Pour les institus, on génère \textbf{k} instituts avec \textbf{n} préférences pour chaque institut et une capacité \textbf{q}. la capacité de chaque instituts est aussi générer aléatoirement, en respectant,la propriété que la somme des capacités de tout les instituts soit égale au nombre \textbf{n} d'étudiants.
+
+\subsection{Implémentation de l'algorithme du mariage stable}
+
+
+
+\subsection{Interface de visualisation}
+Pour pouvoir visualiser, les affectations des étudiants aux instituts, on a pensé à une structure de graphes, avec des noeuds et des arêtes, pour mieux visualiser tout cela.
+Chaque institut et chaque étudiants sont représenté par un noeud, étiqueté par le numéro de ces derniers (ex : E1 ou I1). 
+Chaque affectation est représenté par une arête, donc une arête entre un étudiant et son affectation d'instituts.
+
+\begin{figure}[!h]
+  \centering
+  \caption{Visualisation via app web}
+  \includegraphics[width = 0.9\textwidth]{img/Screen_graph_dash.png}
+\end{figure}
+
+Cette visualisation est une petite application web, faite avec la bibliothèque \textit{Dash} disponible sous python, qui permet de projeter des graphes avec un serveur web.
+
+Sachant que nos résultats des affectations sont exportés dans des fichiers sous fromat \textit{JSON} ou \textit{CSV}, donc les résultats restent toujours, consultables via fichiers. 
+
+\begin{figure}[!h]
+  \caption{Visualisation via fichier JSON\\}
+  \centering
+  \includegraphics[width = 0.3\textwidth]{img/screen_json.png}
+\end{figure}
+
+\begin{figure}[!h]
+  \caption{Visualisation via fichier CSV\\}
+  \centering
+  \includegraphics[width = 0.1\textwidth]{img/screen_csv.png}
+\end{figure}
+
+\subsection{Méthodes de satisfaction}
+La satisfaction de chaque côté est nécéssaire, pour évaluer nos algorithmes et les classés. Les problèmes de satisfaction apparaîssent toujours dans les systèmes d'aid à la décison ou plus précisement dans les systèmes d'affectations. Dans notre projet, on s'est concentré sur la satisfaction des étudiants, qui est un problème très fréquent dans la vie réelle. 
+\subsubsection*{Satisfaction des étudiants}
+Il existe plusieurs manières pour calculer la satisfaction des étudiants, on a choisi des méthodes qui sont significatives. Ces méthodes ont de même des points forts et des points faibles.
+Toutes les méthodes sont faites, d'une façon à donner une note à chaque étudiant, selon son affectation par rapport à sa liste de préférences. Une moyenne de tout les étudiant permet de mesurer la satisfaction globale de tout les étudiants. 
+\paragraph{Linéaire}
+
+Cette méthode consiste à donner une note de sat
+
+
+
+\subsubsection*{Satisfaction des instituts}
+
+
+\section{Extension du système}
+
+\subsection{Random assignement}
+
+\subsection{Li mkawda 3lihoum}
+
+\section{Conclusion}
+
+\subsection{Utilisation du programme}
+
+
+\subsection{Perspectives}
+
+\subsubsection{Pré-matching-Problem and Theroem de HALL}
+
+
+\end{document}
