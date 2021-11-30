@@ -171,7 +171,7 @@ mations sur les différents fichiers et répertoires du projet :
 \subsection{Programme de génération de préférences aléatoires}
 
 
-La première partie du travail est la génération de préférences aléatoires pour les étudiants ainsi que les institutions. L'objectif ici est de générer un fichier contenant ces préférences qui pourra ensuite être interprété par un programme. Nous avons choisi de représenter les préférences par un fichier \textit{JSON\footnote{JavaScript Object Notation est un format de données textuelles dérivé de la notation des objets du langage JavaScript. Il permet de représenter de l’information structurée comme le permet XML par exemple.}}. En effet, ce format est très expressif et facile à manipuler.
+La première partie du travail est la génération de préférences aléatoires pour les étudiants ainsi que les instituts. L'objectif ici est de générer un fichier contenant ces préférences qui pourra ensuite être interprété par un programme. Nous avons choisi de représenter les préférences par un fichier \textit{JSON\footnote{JavaScript Object Notation est un format de données textuelles dérivé de la notation des objets du langage JavaScript. Il permet de représenter de l’information structurée comme le permet XML par exemple.}}. En effet, ce format est très expressif et facile à manipuler.
 
 
 \newpage
@@ -200,15 +200,15 @@ La première partie du travail est la génération de préférences aléatoires 
   }
 \end{lstlisting}
 
-Pour cela, nous avons défini une fonction qui, en lui donnant en paramètre : $N$ le nombre d'étudiants et $K$ le nombre d'institutions, génère le fichier \textit{JSON} ci-dessus. Ce fichier représente les préférences des étudiants et celles des institutions. On attribut à chaque étudiant une liste de $K$ institutions générer aléatoirement et classées par ordre de préférence. La même chose est faite pour chaque institution. Mais cette fois, pour chaque institutions, on lui attribut aléatoirement en plus une capacité d'accueil. La capacité d'accueil est généré de sorte que la somme de toutes les capacités soit égale à $N$ le nombre d'étudiants.
+Pour cela, nous avons défini une fonction qui, en lui donnant en paramètre : $N$ le nombre d'étudiants et $K$ le nombre d'instituts, génère le fichier \textit{JSON} ci-dessus. Ce fichier représente les préférences des étudiants et celles des instituts. On attribut à chaque étudiant une liste de $K$ instituts générer aléatoirement et classées par ordre de préférence. La même chose est faite pour chaque institut. Mais cette fois, pour chaque instituts, on lui attribut aléatoirement en plus une capacité d'accueil. La capacité d'accueil est généré de sorte que la somme de toutes les capacités soit égale à $N$ le nombre d'étudiants.
 
 Ceci a été implémenté dans le fichier \textit{generate.py} indépendamment du reste des programmes. Les jeux de données ainsi générer sont ensuite mis dans le répertoire \textit{data/}.
 
 \subsection{Implémentation de l'algorithme du mariage stable}
 
-La seconde partie du projet est l'implémentation d'un algorithme de mariage stable. Pour cela nous avons adapté deux implémentations de l'algorithme de \textit{Gale \& Shapley} à nos jeux de données. L'une donnant la priorité aux étudiants et la seconde aux institutions\footnote{Les deux fonctions ont été définis dans le fichier \textit{algorithme.py}}. Dans ces implémentation, nous supposant qu'il y assez de place dans les institutions pour tout les étudiants. Nous supposant aussi que la taille de la liste des préférences des étudiants (Resp. les institutions) est égale à $K$ le nombre d'institutions (Resp. $N$ le nombre d'étudiants). Cette condition est nécessaire afin d'assurer qu'un mariage stable existe (Voir le \href{https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_de_Hall}{Théorème de Hall}).
+La seconde partie du projet est l'implémentation d'un algorithme de mariage stable. Pour cela nous avons adapté deux implémentations de l'algorithme de \textit{Gale \& Shapley} à nos jeux de données. L'une donnant la priorité aux étudiants et la seconde aux instituts\footnote{Les deux fonctions ont été définis dans le fichier \textit{algorithme.py}}. Dans ces implémentation, nous supposant qu'il y assez de place dans les instituts pour tout les étudiants. Nous supposant aussi que la taille de la liste des préférences des étudiants (Resp. les instituts) est égale à $K$ le nombre d'instituts (Resp. $N$ le nombre d'étudiants). Cette condition est nécessaire afin d'assurer qu'un mariage stable existe (Voir le \href{https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_de_Hall}{Théorème de Hall}).
 
-Ensuite, nous obtenons un programme principal (\textit{main.py}), utilisable en ligne de commande, qui affiche (voir \autoref{fig:sortie}) le temps d'exécution des deux algorithmes ainsi que la satisfaction des étudiants et des institutions, point qu'on vas aborder un peu plus loin dans ce rapport.
+Ensuite, nous obtenons un programme principal (\textit{main.py}), utilisable en ligne de commande, qui affiche (voir \autoref{fig:sortie}) le temps d'exécution des deux algorithmes ainsi que la satisfaction des étudiants et des instituts, point qu'on vas aborder un peu plus loin dans ce rapport.
 
 \begin{figure}[!h]
 \centering
@@ -217,7 +217,7 @@ Ensuite, nous obtenons un programme principal (\textit{main.py}), utilisable en 
 \label{fig:sortie}
 \end{figure}
 
-De plus, ce programme exporte dans deux fichiers sous le format \textit{JSON}\footnote{Le format \textit{CSV} est aussi possible mais pour la visualisation en graphe c'est le format \textit{JSON} qui est utilisé} les résultats des affectations (priorité aux étudiants et priorité aux institutions).
+De plus, ce programme exporte dans deux fichiers sous le format \textit{JSON}\footnote{Le format \textit{CSV} est aussi possible mais pour la visualisation en graphe c'est le format \textit{JSON} qui est utilisé} les résultats des affectations (priorité aux étudiants et priorité aux instituts).
 
 \begin{lstlisting}[language=json, caption="Fichier des affectations\, priorité au étudiants"]
   {
@@ -231,7 +231,7 @@ De plus, ce programme exporte dans deux fichiers sous le format \textit{JSON}\fo
 
 \subsection{Interface de visualisation}
 
-Pour pouvoir mieux visualiser les affectations des étudiants aux institutions, on a pensé à une structure de graphes. Chaque institut et chaque étudiant sont représentés par un nœud étiqueté par leurs noms. Chaque affectation est représentée par une arête qui lie un étudiant à son institution.
+Pour pouvoir mieux visualiser les affectations des étudiants aux instituts, on a pensé à une structure de graphes. Chaque institut et chaque étudiant sont représentés par un nœud étiqueté par leurs noms. Chaque affectation est représentée par une arête qui lie un étudiant à son institut.
 
 \begin{figure}[!h]
 \centering

@@ -132,8 +132,13 @@ dmypy.json
 
 #VSCode
 
-rapport.aux
-rapport.fdb_latexmk
-rapport.fls
-rapport.out
-rapport.synctex.gz
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.log
+*.nav
+*.snm
+*.toc
+
