@@ -258,10 +258,12 @@ Contrairement à la satisfaction des étudiants, celle des institus doit réspec
 
 
 \section{Extension du système}
+Dans cette dernière partie du projet, l'objectif est de proposer une réprésentation compacte des préferences. On a choisit de se réferer à la vie réelle, où les étudiants ont un nombre précis de choix et non pas le nombre d'instituts. Cela pose un problème pour l'algorithme du mariage stable, donc si on exécute bêtement l'algorithme de \textit{Gale \& Shapley}, on n'aura pas une affectation stable entre les étudiants et les instituts, on sortira avec un résultat où un certain nombre d'etudiants se retrouveront sans instituts. Pour rémedier à ce problème on a choisit deux méthodes, pour affecter les étudiants aux instituts, ces deux dernières modifient l'algorithme de \textit{Gale \& Shapley} pour avoir un résultat.
 
 \subsection{Random assignement}
-
-\subsection{Li mkawda 3lihoum}
+Random assignement ou affectation aléatoire, cette méthode consiste à affecter temporairement et aléatoirement un étudiant à un institut \textit{Ii} qui a toujours de la place, si cet étudiant \textit{Ei} n'a plus de choix possible dans sa liste de préférences (il a été réfusé pour tout ces choix). De cette manière, on s'assure que chaque étudiant soit affecter. Si un autre étudiant \textit{Ej} a dans ces choix l'institut \textit{Ii}, on préfere \textit{Ej} à \textit{Ei}, même si ce dernier est mieux classé que \textit{Ej}.
+\subsection{Les sans intituts}
+contrairement à la première méthode, on traite les étudiants qui n'ont plus de choix en dernier. c.à.d, on réalise l'affectation pour les étudiants ayant toujours un choix. Ensuite, tout les étudiants qui n'ont plus de choix seront affectés en dernier à l'institut auquel ils sont le mieux classés parmis les instituts restants qui ont toujours de la place.
 
 \section{Conclusion}
 
