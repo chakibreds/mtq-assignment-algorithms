@@ -308,6 +308,35 @@ Contrairement à la première méthode, on traite les étudiants qui n'ont plus 
 
 \subsection{Utilisation du programme}
 
+\paragraph{Génération des jeux de données}
+
+La première étape est de générer les jeux de données. Pour cela, le script \textit{generate.py} est utilisé. Il prend en paramètre $N$ le nombre d'étudiants, $K$ le nombre d'instituts et le nom du fichier à créer.
+
+\begin{lstlisting}[language=bash,caption="Commande qui génére un jeu de données"]
+  python3 src/generate.py <N> <K> <path/to/file.json>
+\end{lstlisting}
+
+\paragraph{Exécution de l'algorithme du mariage stable}
+
+Ensuite, on passe un jeu de données au programme principal \textit{main.py}. Ce dernier prend en paramètre le fichier de préférence ainsi qu'un répertoire où écrire les affectations.
+
+\begin{lstlisting}[language=bash,caption="Commande qui exécute le programme principal"]  
+  python3 src/main.py <preferences.json> <output/dir/>
+\end{lstlisting}
+
+Cette commande génére deux fichiers en résultat. 
+\begin{itemize}
+  \item \textit{preference\_students.json} qui représente les affectations avec priorité aux étudiants
+  \item \textit{preference\_institut.json} qui représente les affectations avec priorité aux instituts
+\end{itemize}
+
+\paragraph{Visualisation du graphe}
+
+Enfin, ce dernier résultat est passé en argument au programme \textit{graphviz.py} qui lance un serveur en local. Un lien est fourni pour accéder à l'interface de visualisation.
+
+\begin{lstlisting}[language=bash,caption="Commande qui lance la visualisation" ]  
+  python3 src/graphviz.py <filename.json>
+\end{lstlisting}
 
 \subsection{Perspectives}
 

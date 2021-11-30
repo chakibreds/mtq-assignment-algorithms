@@ -47,7 +47,7 @@ def drawGraph(filename):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python3 graphviz.py <filename.csv>")
+        print("Usage: python3 graphviz.py <filename.json>")
         exit(1)
     
     filename = sys.argv[1]
