@@ -17,8 +17,7 @@ Le but de ce projet est de faire une analyse critique de l’algorithme du maria
 ### Visualisation des graphes
 
 ```shell
-sudo apt-get install graphviz graphviz-dev
-pip install pygraphviz
+pip install dash
 ```
 
 ## Rendus

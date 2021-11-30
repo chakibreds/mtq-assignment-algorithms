@@ -1,6 +1,5 @@
 import sys
 import json
-from pygraphviz import *
 
 import dash
 from dash import dcc
@@ -9,28 +8,7 @@ import dash_cytoscape as cyto
 from dash.dependencies import Input, Output
 import plotly.express as px
 
-def drawGraph(filename, output='output/graph.png'):
-    """ with open(filename, 'r') as f:
-        data = json.load(f)
-    
-    G = AGraph(data)
-    G.node_attr["fontcolor"] = "#FFFFFF"
-    G.graph_attr["label"] = "Affecation"
-
-    for institu in data:
-        n = G.get_node(institu)
-        n.attr['style'] = 'filled'
-        n.attr['fillcolor'] = '#2e2c2a'
-
-        for student in data[institu]:
-            n = G.get_node(student)
-            n.attr['style'] = 'filled'
-            n.attr['fillcolor'] = '#e68015'
-
-    G.layout(prog='neato')
-    G.draw(output)
-    print(f"Fichier '{output}' créer avec succée")
- """
+def drawGraph(filename):
     with open(filename, 'r') as f:
         data = json.load(f)
     app = dash.Dash(__name__)
@@ -64,18 +42,14 @@ def drawGraph(filename, output='output/graph.png'):
         )
     ])
 
-    app.run_server(debug=True)
+    app.run_server(debug=False)
     
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: python3 graphviz.py <filename.csv> <output/dir/>")
+    if len(sys.argv) != 2:
+        print("Usage: python3 graphviz.py <filename.csv>")
         exit(1)
     
     filename = sys.argv[1]
-    output_dir = sys.argv[2]
-    if output_dir[-1] != '/':
-        output_dir += '/'
 
-    output = output_dir + filename.split('/')[-1].split('.')[0] + '.png'
-    drawGraph(filename, output=output)
+    drawGraph(filename)
