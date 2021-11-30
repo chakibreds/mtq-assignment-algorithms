@@ -118,39 +118,61 @@ Kezzoul Massili
 
 \section*{Introduction}
 
+
 \subsection*{Objectif du projet}
 
-L'objectif principal du projet est de réaliser une analyse critique de l'algorithme du mariage stable. Dans un premier temps l'objectif est d'implémenter l'algorithme de Gale et Shapley (mariage stable), pour l'affectation des étudiants aux institus, ensuite, de proposer une méthode de satisfaction pour les deux côtés et de tester cet algorithme sur plusieurs jeux de données. Finalement, c'est de proposer une représentation compacte des préférences. 
+
+L'objectif principal du projet est de réaliser une analyse critique de l'algorithme du mariage stable. Dans un premier temps l'objectif est d'implémenter l'algorithme de Gale et Shapley (mariage stable), pour l'affectation des étudiants aux instituts, ensuite, de proposer une méthode de satisfaction pour les deux côtés et de tester cet algorithme sur plusieurs jeux de données. Finalement, c'est de proposer une représentation compacte des préférences.
+
 
 \subsection*{Environnement de développement}
 
-Le projet a été développé sur notre propre environnement de travail. On a utilisé le langage Python, pour l'implémentation des différentes fonctionnalités, en utilisant plusieurs bibliothèques propres à Python. 
+
+Le projet a été développé sur notre propre environnement de travail. On a utilisé le langage Python, pour l'implémentation des différentes fonctionnalités, en utilisant plusieurs bibliothèques propres à Python.
+
 
 \subsection*{Structure du projet}
 
+
 Pour une meilleure compréhension de l’environnement du projet, voici ci-dessous différentes infor-
+
 mations sur les différents fichiers et répertoires du projet :
 
+
 \begin{description}
-	\item[\textit{src/}] Répertoire contenant les fichiers sources du projet.
-	\begin{description}
-    \item[\textbf{generate.py}] Fichier pour la génération automatique de jeux de données.
-    \item[\textbf{algorithme.py}] Fichier implémentant les différents algorithmes, notamment celui de Gale et Shapley.
-    \item[\textbf{graphviz.py}] Fichier de visualisation.
-    \item[\textbf{main.py}] Fichier contenant le programme principale du projet. 
-  \end{description} 
-	\item[\textit{data/}] Répertoire contenant les différents jeux de données de différentes tailles.
-	\item[\textit{output/}] Répertoire contenant toutes les sorties du programme.	
-	\item[\textit{README.md}] Fichier expliquant la manière d'utiliser le programme (initialisation, compilation et exécution). Referez-vous à la section \textit{Utilisation} de ce dernier pour plus d'informations.
-	\item[\textit{Makefile}] Fichier qui spécifient les commandes de compilation, initialisation et autres.
+
+\item[\textit{src/}] Répertoire contenant les fichiers sources du projet.
+
+\begin{description}
+
+\item[\textbf{generate.py}] Fichier pour la génération automatique de jeux de données.
+
+\item[\textbf{algorithme.py}] Fichier implémentant les différents algorithmes, notamment celui de Gale et Shapley.
+
+\item[\textbf{graphviz.py}] Fichier de visualisation.
+
+\item[\textbf{main.py}] Fichier contenant le programme principale du projet.
+
+\end{description}
+
+\item[\textit{data/}] Répertoire contenant les différents jeux de données de différentes tailles.
+
+\item[\textit{output/}] Répertoire contenant toutes les sorties du programme.
+
+\item[\textit{README.md}] Fichier expliquant la manière d'utiliser le programme (initialisation, exécution). Referez-vous à la section \textit{Utilisation} de ce dernier pour plus d'informations.
+
 \end{description}
 
 
-\section{Modèlisation et implémentation}
+
+\section{Modélisation et implémentation}
+
 
 \subsection{Programme de génération de préférences aléatoires}
 
-La première partie du travail est la génération de préférences aléatoires pour les étudiants ainsi que les institutions. L'objectif ici est de générer un fichier contenant ces préférences qui pourra ensuite être interpréter par un programme. Nous avons choisis de reprèsenter les préférences par un fichier \textit{JSON\footnote{JavaScript Object Notation est un format de données textuelles dérivé de la notation des objets du langage JavaScript. il permet de représenter de l’information structurée comme le permet XML par exemple.}}. En effet, ce format est très expressif et facile à manipuler.
+
+La première partie du travail est la génération de préférences aléatoires pour les étudiants ainsi que les institutions. L'objectif ici est de générer un fichier contenant ces préférences qui pourra ensuite être interprété par un programme. Nous avons choisi de représenter les préférences par un fichier \textit{JSON\footnote{JavaScript Object Notation est un format de données textuelles dérivé de la notation des objets du langage JavaScript. Il permet de représenter de l’information structurée comme le permet XML par exemple.}}. En effet, ce format est très expressif et facile à manipuler.
+
 
 \newpage
 
@@ -178,21 +200,21 @@ La première partie du travail est la génération de préférences aléatoires 
   }
 \end{lstlisting}
 
-Pour cela, nous avons définis une fonction qui, en lui donnant en paramètre : $N$ le nombre d'étudiants et $K$ le nombre d'institutions, génére le fichier \textit{JSON} ci-dessus. Ce fichier représente les préférences des étudiants et celles de institutions. On attribut à chaque étudiant une liste de $K$ institutions générer aléatoirement et classées par ordre de préférence. La même chose est faite pour chaque institution. Mais cette fois, pour chaque institutions, on lui attribut aléatoirement en plus une capacité d'acceuil. La capacité d'acceuil est génére de sorte que la somme de toutes les capacités soit égal à $N$ le nombre d'étudiants.
+Pour cela, nous avons défini une fonction qui, en lui donnant en paramètre : $N$ le nombre d'étudiants et $K$ le nombre d'institutions, génère le fichier \textit{JSON} ci-dessus. Ce fichier représente les préférences des étudiants et celles des institutions. On attribut à chaque étudiant une liste de $K$ institutions générer aléatoirement et classées par ordre de préférence. La même chose est faite pour chaque institution. Mais cette fois, pour chaque institutions, on lui attribut aléatoirement en plus une capacité d'accueil. La capacité d'accueil est généré de sorte que la somme de toutes les capacités soit égale à $N$ le nombre d'étudiants.
 
-Ceci à été implémenter dans le fichier \textit{generate.py} indépendament du reste des programmes. Les jeux de données ainsi générer sont ensuite mis dans le répertoire \textit{data/}.
+Ceci a été implémenté dans le fichier \textit{generate.py} indépendamment du reste des programmes. Les jeux de données ainsi générer sont ensuite mis dans le répertoire \textit{data/}.
 
 \subsection{Implémentation de l'algorithme du mariage stable}
 
-La seconde partie du projet est l'implèmentation d'un algorithme de marage stable. Pour cela nous avons adapté deux implémentations de l'algorithme de \textit{Gale \& Shapley} à nos jeux de données. L'une donnant la priorité aux étudiants et la seconde aux institutions\footnote{Les deux fonctions ont été définis dans le fichier \textit{algorithme.py}}. Dans ces implèmentation, nous supposant qu'il y assez de place dans les institutions pour tout les étudiants. Nous supposant aussi que la taille de la liste des préférences des étudiants (Resp. les institutions) est égale à $K$ le nombre d'institutions (Resp. $N$ le nombre d'étudiants). Cette condition est nécessaire afin d'assurer qu'un mariage stable existe (Voir le \href{https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_de_Hall}{Théorème de Hall}).
+La seconde partie du projet est l'implémentation d'un algorithme de mariage stable. Pour cela nous avons adapté deux implémentations de l'algorithme de \textit{Gale \& Shapley} à nos jeux de données. L'une donnant la priorité aux étudiants et la seconde aux institutions\footnote{Les deux fonctions ont été définis dans le fichier \textit{algorithme.py}}. Dans ces implémentation, nous supposant qu'il y assez de place dans les institutions pour tout les étudiants. Nous supposant aussi que la taille de la liste des préférences des étudiants (Resp. les institutions) est égale à $K$ le nombre d'institutions (Resp. $N$ le nombre d'étudiants). Cette condition est nécessaire afin d'assurer qu'un mariage stable existe (Voir le \href{https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_de_Hall}{Théorème de Hall}).
 
-Ensuite, nous obtenons un programme principal (\textit{main.py}), utilisable en ligne de commande, qui affiche (voir \autoref{fig:sortie}) le temps d'exécution des deux algorithmes ainsi que la satisfaction des étudiants et des institutions, point qu'on vas aborder un peu plus loin dans ce rapport. 
+Ensuite, nous obtenons un programme principal (\textit{main.py}), utilisable en ligne de commande, qui affiche (voir \autoref{fig:sortie}) le temps d'exécution des deux algorithmes ainsi que la satisfaction des étudiants et des institutions, point qu'on vas aborder un peu plus loin dans ce rapport.
 
 \begin{figure}[!h]
-  \centering
-  \includegraphics[width = 0.8\textwidth]{img/sortie_programme.png}
-  \caption{Affichage produit par le programme principal}
-  \label{fig:sortie}
+\centering
+\includegraphics[width = 0.8\textwidth]{img/sortie_programme.png}
+\caption{Affichage produit par le programme principal}
+\label{fig:sortie}
 \end{figure}
 
 De plus, ce programme exporte dans deux fichiers sous le format \textit{JSON}\footnote{Le format \textit{CSV} est aussi possible mais pour la visualisation en graphe c'est le format \textit{JSON} qui est utilisé} les résultats des affectations (priorité aux étudiants et priorité aux institutions).
@@ -209,47 +231,47 @@ De plus, ce programme exporte dans deux fichiers sous le format \textit{JSON}\fo
 
 \subsection{Interface de visualisation}
 
-Pour pouvoir mieux visualiser les affectations des étudiants aux institution, on a pensé à une structure de graphes. Chaque institut et chaque étudiant sont représentés par un noeud étiqueté par leurs noms. Chaque affectation est représenté par une arête qui lie un étudiant à son institution.
+Pour pouvoir mieux visualiser les affectations des étudiants aux institutions, on a pensé à une structure de graphes. Chaque institut et chaque étudiant sont représentés par un nœud étiqueté par leurs noms. Chaque affectation est représentée par une arête qui lie un étudiant à son institution.
 
 \begin{figure}[!h]
-  \centering
-  \includegraphics[width = 1.0\textwidth]{img/Screen_graph_dash.png}
-  \caption{Visualisation en graphe}
+\centering
+\includegraphics[width = 1.0\textwidth]{img/Screen_graph_dash.png}
+\caption{Visualisation en graphe}
 \end{figure}
 
-On obtient cette visualisation\footnote{Les points rouges représente les instituts et les points bleus représente les étudiants} en utilisant le programme \textit{graphviz.py} à qui en passe en argument un fichier \textit{JSON} produits precedement. Ce programme utilise la bibliothèque \textit{Dash}, qui permet de projeter des graphes interactifs via un petit serveur web en local.
+On obtient cette visualisation\footnote{Les points rouges représentent les instituts et les points bleus représentent les étudiants} en utilisant le programme \textit{graphviz.py} à qui en passe en argument un fichier \textit{JSON} produits précedement. Ce programme utilise la bibliothèque \textit{Dash}, qui permet de projeter des graphes interactifs via un petit serveur web en local.
 
 \subsection{Méthodes de satisfaction}
-La satisfaction de chaque côté est nécéssaire, pour évaluer nos algorithmes et les classés. Les problèmes de satisfaction apparaîssent toujours dans les systèmes d'aid à la décison ou plus précisement dans les systèmes d'affectations. Dans notre projet, on s'est concentré sur la satisfaction des étudiants, qui est un problème très fréquent dans la vie réelle. 
+La satisfaction de chaque côté est nécessaire, pour évaluer nos algorithmes et les classés. Les problèmes de satisfaction apparaissent toujours dans les systèmes d'aid à la décision ou plus précisément dans les systèmes d'affectations. Dans notre projet, on s'est concentré sur la satisfaction des étudiants, qui est un problème très fréquent dans la vie réelle.
 \subsubsection*{Satisfaction des étudiants}
 Il existe plusieurs manières pour calculer la satisfaction des étudiants, on a choisi des méthodes qui sont significatives. Ces méthodes ont de même des points forts et des points faibles.
-Toutes les méthodes sont faites, d'une façon à donner une note à chaque étudiant, selon son affectation par rapport à sa liste de préférences. Une moyenne de ces notes permet de mesurer la satisfaction globale de tout les étudiants. 
-La note de chaque étudiant est comprise entre 0 et 1, c.à.d si un étudiant a eu son premier choix, il aura une note de 1 et s'il a eu son dernier choix, il aura une satisfaction égale à 0. Les notes des autres choix sont calculés avec des fonction mathématiques du genre $y = f(i)$, tel que, \textit{y} est la note de satisfaction et \textit{i} est la position de l'affectation de l'étudiant dans sa liste de préférences. 
+Toutes les méthodes sont faites, d'une façon de donner une note à chaque étudiant, selon son affectation par rapport à sa liste de préférences. Une moyenne de ces notes permet de mesurer la satisfaction globale de tous les étudiants.
+La note de chaque étudiant est comprise entre 0 et 1, c.à.d. si un étudiant a eu son premier choix, il aura une note de 1 et s'il a eu son dernier choix, il aura une satisfaction égale à 0. Les notes des autres choix sont calculées avec des fonctions mathématiques du genre $y = f(i)$, tel que, \textit{y} est la note de satisfaction et \textit{i} est la position de l'affectation de l'étudiant dans sa liste de préférences. 
 
 
-\paragraph{Linéaire} En premier, une fonction linéaire, une façon très simple de calculer les satisfactions. Son principe est de donner une note à un choix \textit{i} d'un étudiant qui est infèrieure à la note du choix \textit{i-1}. Cette note diminue de 1 vers 0 d'une façon constante (comme le montre le graph ci-dessous) et cela selon le nombre de choix \textbf{k} des étudiants. Donc, par exemple si \textbf{k} = 10, on aura une liste de valeurs = (1, 0.9, 0.8 ,0.7, \dots, 0). 
+\paragraph{Linéaire} en premier, une fonction linéaire, une façon très simple de calculer les satisfactions. Son principe est de donner une note à un choix \textit{i} d'un étudiant qui est inférieure à la note du choix \textit{i-1}. Cette note diminue de 1 vers 0 d'une façon constante (comme la montre le graphe ci-dessous) et cela selon le nombre de choix \textbf{k} des étudiants. Donc, par exemple si \textbf{k} = 10, on aura une liste de valeurs = (1, 0.9, 0.8 ,0.7, \dots, 0).
 Cette méthode de calculer est efficace pour un petit jeu de données, mais si on a un grand jeu de données, par exemple 100000 étudiant et 100 instituts, on a constaté que la satisfaction globale approche de 1, car les cinq premiers choix auront des notes élevées égales à (1, 0.99, 0.98, 0.97, 0.96), alors que dans un jeu de données pareil, 90\% des étudiants ont eu un de leurs trois premiers choix et que le pire étudiant a eu son 11ème choix avec une note de 0.9, tout cela affecte la moyenne globale des satisfactions et du fait quelle soit proche de 1. Aussi, vu que notre fonction diminue d'une façon linéaire, la différence entre la note du 1\textsuperscript{er} et du 2\textsuperscript{ème} choix est égale à la différence entre la note du 66\textsuperscript{ème} et du 67\textsuperscript{ème} choix. Ce qui nous a mener à penser à d'autres fonctions.
 
 \begin{figure}[!h]
-  \centering
-  \includegraphics[width = 0.5\textwidth]{img/linear.png}
-  \caption{Fonction linéaire}
+\centering
+\includegraphics[width = 0.5\textwidth]{img/linear.png}
+\caption{Fonction linéaire}
 \end{figure}
 
-\paragraph{Polynomiale} Une fonction qui diminue d'une façon polynomiale, c.à.d, la différence entre  chaque deux choix décroît en allant du premier au dernier choix. ce qui limite le problème de la fonction linéaire. Par exemple, la différence entre la note du 1\textsuperscript{er} et du 2\textsuperscript{ème} choix est supèrieure à la différence entre la note du 66\textsuperscript{ème} et du 67\textsuperscript{ème} choix. Ce qui donne une forme d'importance aux premiers choix et une importance moindre aux derniers. Dans un cas pratique, un étudiant qui aura son 50\textsuperscript{ème} choix ou son 60\textsuperscript{ème} choix reste déçu dans les deux cas. Par contre, un étudiant qui aura son 1\textsuperscript{er} choix ou son 10\textsuperscript{ème}, voit sa satisfaction très affecter. Le graphe ci-dessous montre la décroissance non linéaire de la note d'une affectation. 
+\paragraph{Polynomiale} une fonction qui diminue d'une façon polynomiale, c.à.d. la différence entre chaque deux choix décroît en allant du premier au dernier choix. Ce qui limite le problème de la fonction linéaire. Par exemple, la différence entre la note du 1\textsuperscript{er} et du 2\textsuperscript{ème} choix est supérieure à la différence entre la note du 66\textsuperscript{ème} et du 67\textsuperscript{ème} choix. Ce qui donne une forme d'importance aux premiers choix et une importance moindre aux derniers. Dans un cas pratique, un étudiant qui aura son 50\textsuperscript{ème} choix ou son 60\textsuperscript{ème} choix reste déçu dans les deux cas. Par contre, un étudiant qui aura son 1\textsuperscript{er} choix ou son 10\textsuperscript{ème}, voit sa satisfaction très affecter. Le graphe ci-dessous montre la décroissance non-linéaire de la note d'une affectation.
 
 \begin{figure}[!h]
-  \centering
-  \includegraphics[width = 0.5\textwidth]{img/poly.png}
-  \caption{Fonction polynomiale}
+\centering
+\includegraphics[width = 0.5\textwidth]{img/poly.png}
+\caption{Fonction polynomiale}
 \end{figure}
 
-\paragraph{Inverse} Une fonction inverse du genre $f(i) = \frac{1}{i}$. Cette fonction permet de donner une plus grande importance aux premiers choix, dans ce cas là le 2\textsuperscript{ème} choix aura une note de 0.5, qui est une différence énorme entre le 1\textsuperscript{er} et le 2\textsuperscript{ème} choix. on a pensé a cette fonction pour donner une satisfaction globale qui accorde plus d'importance au 1\textsuperscript{er} choix, Donc plus la moyenne est élevée, plus on saura qu'un grand nombre d'étudiants ont eu leurs 1\textsuperscript{er} choix. Le graphe ci-dessous montre la décroissance de la fonction inverse. 
+\paragraph{Inverse} une fonction inverse du genre $f(i) = \frac{1}{i}$. Cette fonction permet de donner une plus grande importance aux premiers choix, dans ce cas-là le 2\textsuperscript{ème} choix aura une note de 0.5, qui est une différence énorme entre le 1\textsuperscript{er} et le 2\textsuperscript{ème} choix. On a pensé à cette fonction pour donner une satisfaction globale qui accorde plus d'importance au 1\textsuperscript{er} choix, Donc plus la moyenne est élevée, plus on saura qu'un grand nombre d'étudiants ont eu leurs 1\textsuperscript{er} choix. Le graphe ci-dessous montre la décroissance de la fonction inverse.
 
 \begin{figure}[!h]
-  \centering
-  \includegraphics[width = 0.5\textwidth]{img/inverse.png}
-  \caption{Fonction inverse}
+\centering
+\includegraphics[width = 0.5\textwidth]{img/inverse.png}
+\caption{Fonction inverse}
 \end{figure}
 
 Nous pouvons remarquer, sur la figure ci-dessous, la différence entre ces différentes fonctions.
@@ -261,28 +283,27 @@ Nous pouvons remarquer, sur la figure ci-dessous, la différence entre ces diff�
 \end{figure}
 
 \subsubsection*{Satisfaction des instituts}
-Contrairement à la satisfaction des étudiants, celle des institus doit réspecter une contrainte supplémentaire, qui est du au faite qu'on affecte à chaque institut plusieurs étudiants selon sa capacité $Q$. Pour palier à cette contrainte et avoir une valuer de satisfaction significative, Nous attribuons une note maximale de 1 pour un institut donné, si et seulement si les étudiants affectés à cet institut sont les $Q$ \textbf{premiers} choix de ce dernier. inversement, une note de 0 est attribué si et seulement si les étudiants affectés à cet institut sont les $Q$ \textbf{derniers} choix de ses préférences. Toutes les affectations qui sont au milieu suive une fonction qui diminue linéairement. Une moyenne est calculé pour avoir une satisfaction globale de tout les instituts.
+Contrairement à la satisfaction des étudiants, celle des instituts doit respecter une contrainte supplémentaire, qui est due au fait qu'on affecte à chaque institut plusieurs étudiants selon sa capacité $Q$. Pour palier à cette contrainte et avoir une note de satisfaction significative, Nous attribuons une note maximale de 1 pour un institut donné, si et seulement si les étudiants affectés à cet institut sont les $Q$ \textbf{premiers} choix de ce dernier. Inversement, une note de 0 est attribuée si et seulement si les étudiants affectés à cet institut sont les $Q$ \textbf{derniers} choix de ses préférences. Toutes les affectations qui sont au milieu suivent une fonction qui diminue linéairement. Une moyenne est calculée pour avoir une satisfaction globale de tous les instituts.
 
 
 \begin{figure}[!h]
-  \centering
-  \includegraphics[width = 0.5\textwidth]{img/instituts.png}
-  \caption{Fonction priorité aux instituts pour $Q = 10$}
+\centering
+\includegraphics[width = 0.5\textwidth]{img/instituts.png}
+\caption{Fonction priorité aux instituts pour $Q = 10$}
 \end{figure}
 
 \begin{figure}
-  
+
 \end{figure}
 
 
 \section{Extension du système}
-Dans cette dernière partie du projet, l'objectif est de proposer une réprésentation compacte des préferences. On a choisit de se réferer à la vie réelle, où les étudiants ont un nombre précis de choix et non pas le nombre d'instituts. Cela pose un problème pour l'algorithme du mariage stable, donc si on exécute bêtement l'algorithme de \textit{Gale \& Shapley}, on n'aura pas une affectation stable entre les étudiants et les instituts, on sortira avec un résultat où un certain nombre d'etudiants se retrouveront sans instituts. Pour rémedier à ce problème on a choisit deux méthodes, pour affecter les étudiants aux instituts, ces deux dernières modifient l'algorithme de \textit{Gale \& Shapley} pour avoir un résultat.
+Dans cette dernière partie du projet, l'objectif est de proposer une représentation compacte des préférences. On a choisi de se référer à la vie réelle, où les étudiants ont un nombre précis de choix et non pas le nombre d'instituts. Cela pose un problème pour l'algorithme du mariage stable, donc si on exécute bêtement l'algorithme de \textit{Gale \& Shapley}, on n'aura pas une affectation stable entre les étudiants et les instituts, on sortira avec un résultat où un certain nombre d'étudiants se retrouveront sans instituts. Pour remédier à ce problème on a choisi deux méthodes, pour affecter les étudiants aux instituts, ces deux dernières modifient l'algorithme de \textit{Gale \& Shapley} pour avoir un résultat.
 
 \subsection{Random assignement}
-Random assignement ou affectation aléatoire, cette méthode consiste à affecter temporairement et aléatoirement un étudiant à un institut \textit{Ii} qui a toujours de la place, si cet étudiant \textit{Ei} n'a plus de choix possible dans sa liste de préférences (il a été réfusé pour tout ces choix). De cette manière, on s'assure que chaque étudiant soit affecter. Si un autre étudiant \textit{Ej} a dans ces choix l'institut \textit{Ii}, on préfere \textit{Ej} à \textit{Ei}, même si ce dernier est mieux classé que \textit{Ej}.
-\subsection{Les sans intituts}
-contrairement à la première méthode, on traite les étudiants qui n'ont plus de choix en dernier. c.à.d, on réalise l'affectation pour les étudiants ayant toujours un choix. Ensuite, tout les étudiants qui n'ont plus de choix seront affectés en dernier à l'institut auquel ils sont le mieux classés parmis les instituts restants qui ont toujours de la place.
-
+Random assignement ou affectation aléatoire, cette méthode consiste à affecter temporairement et aléatoirement un étudiant à un institut \textit{Ii} qui a toujours de la place, si cet étudiant \textit{Ei} n'a plus de choix possible dans sa liste de préférences (il a été refusé pour tout ces choix). De cette manière, on s'assure que chaque étudiant soit affecté. Si un autre étudiant \textit{Ej} a dans ces choix l'institut \textit{Ii}, on préfère \textit{Ej} à \textit{Ei}, même si ce dernier est mieux classé que \textit{Ej}.
+\subsection{Les sans instituts}
+Contrairement à la première méthode, on traite les étudiants qui n'ont plus de choix en dernier. c.à.d, on réalise l'affectation pour les étudiants ayant toujours un choix. Ensuite, tous les étudiants qui n'ont plus de choix seront affectés en dernier à l'institut auquel ils sont le mieux classés parmi les instituts restants qui ont toujours de la place.
 \section{Conclusion}
 
 \subsection{Utilisation du programme}
