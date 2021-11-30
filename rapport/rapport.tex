@@ -230,27 +230,45 @@ La note de chaque étudiant est comprise entre 0 et 1, c.à.d si un étudiant a 
 \paragraph{Linéaire} En premier, une fonction linéaire, une façon très simple de calculer les satisfactions. Son principe est de donner une note à un choix \textit{i} d'un étudiant qui est infèrieure à la note du choix \textit{i-1}. Cette note diminue de 1 vers 0 d'une façon constante (comme le montre le graph ci-dessous) et cela selon le nombre de choix \textbf{k} des étudiants. Donc, par exemple si \textbf{k} = 10, on aura une liste de valeurs = (1, 0.9, 0.8 ,0.7, \dots, 0). 
 Cette méthode de calculer est efficace pour un petit jeu de données, mais si on a un grand jeu de données, par exemple 100000 étudiant et 100 instituts, on a constaté que la satisfaction globale approche de 1, car les cinq premiers choix auront des notes élevées égales à (1, 0.99, 0.98, 0.97, 0.96), alors que dans un jeu de données pareil, 90\% des étudiants ont eu un de leurs trois premiers choix et que le pire étudiant a eu son 11ème choix avec une note de 0.9, tout cela affecte la moyenne globale des satisfactions et du fait quelle soit proche de 1. Aussi, vu que notre fonction diminue d'une façon linéaire, la différence entre la note du 1\textsuperscript{er} et du 2\textsuperscript{ème} choix est égale à la différence entre la note du 66\textsuperscript{ème} et du 67\textsuperscript{ème} choix. Ce qui nous a mener à penser à d'autres fonctions.
 
-\begin{figure}
-  
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width = 0.5\textwidth]{img/linear.png}
+  \caption{Fonction linéaire}
 \end{figure}
 
-\paragraph{Polynomiale} Une fonction qui diminue d'une façon Polynomiale, c.à.d, la différence entre  chaque deux choix décroît en allant du premier au dernier choix. ce qui limite le problème de la fonction linéaire. Par exemple, la différence entre la note du 1\textsuperscript{er} et du 2\textsuperscript{ème} choix est supèrieure à la différence entre la note du 66\textsuperscript{ème} et du 67\textsuperscript{ème} choix. Ce qui donne une forme d'importance à la différence entre les premiers choix, contrairement aux derniers choix, Car dans un cas pratique, un étudiant qui aura son 50\textsuperscript{ème} choix ou son 60\textsuperscript{ème} choix, ça reste presque la même chose, du côté de ça satisfaction, par contre, un étudiant, qui aura son 1er\textsuperscript{er} choix ou son 5\textsuperscript{ème} choix, affecte plus ça satisfaction. Le graph ci-dessous montre la décroissance non linéaire entre chaque deux choix. 
+\paragraph{Polynomiale} Une fonction qui diminue d'une façon polynomiale, c.à.d, la différence entre  chaque deux choix décroît en allant du premier au dernier choix. ce qui limite le problème de la fonction linéaire. Par exemple, la différence entre la note du 1\textsuperscript{er} et du 2\textsuperscript{ème} choix est supèrieure à la différence entre la note du 66\textsuperscript{ème} et du 67\textsuperscript{ème} choix. Ce qui donne une forme d'importance aux premiers choix et une importance moindre aux derniers. Dans un cas pratique, un étudiant qui aura son 50\textsuperscript{ème} choix ou son 60\textsuperscript{ème} choix reste déçu dans les deux cas. Par contre, un étudiant qui aura son 1\textsuperscript{er} choix ou son 10\textsuperscript{ème}, voit sa satisfaction très affecter. Le graphe ci-dessous montre la décroissance non linéaire de la note d'une affectation. 
 
-\begin{figure}
-  
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width = 0.5\textwidth]{img/poly.png}
+  \caption{Fonction polynomiale}
 \end{figure}
 
-\paragraph{Inverse} Une fonction Inverse du genre $f(i) = 1/i$, Cette fonction permet de donner, une plus grande importance entre les premiers choix, dans ce cas là le 2\textsuperscript{ème} choix aura une note de 0.5, qui est une différence énorme entre le 1\textsuperscript{er} et le 2\textsuperscript{ème} choix. on a pensé a cette fonction pour donner une satisfaction globale qui accorde plus d'importance au 1\textsuperscript{er} choix, Donc plus la moyenne est élevée, plus on saura qu'un grand nombre d'étudiants ont eu leurs 1\textsuperscript{er} choix. Le graph ci-dessous montre la décroissance de la fonction inverse. 
+\paragraph{Inverse} Une fonction inverse du genre $f(i) = \frac{1}{i}$. Cette fonction permet de donner une plus grande importance aux premiers choix, dans ce cas là le 2\textsuperscript{ème} choix aura une note de 0.5, qui est une différence énorme entre le 1\textsuperscript{er} et le 2\textsuperscript{ème} choix. on a pensé a cette fonction pour donner une satisfaction globale qui accorde plus d'importance au 1\textsuperscript{er} choix, Donc plus la moyenne est élevée, plus on saura qu'un grand nombre d'étudiants ont eu leurs 1\textsuperscript{er} choix. Le graphe ci-dessous montre la décroissance de la fonction inverse. 
 
-\begin{figure}
-  
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width = 0.5\textwidth]{img/inverse.png}
+  \caption{Fonction inverse}
 \end{figure}
 
+Nous pouvons remarquer, sur la figure ci-dessous, la différence entre ces différentes fonctions.
 
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width = 0.5\textwidth]{img/comparatif.png}
+  \caption{Comparaison entre les fonctions}
+\end{figure}
 
 \subsubsection*{Satisfaction des instituts}
 Contrairement à la satisfaction des étudiants, celle des institus doit réspecter une contrainte supplémentaire, qui est du au faite qu'on affecte à chaque institut plusieurs étudiants selon sa capacité $Q$. Pour palier à cette contrainte et avoir une valuer de satisfaction significative, Nous attribuons une note maximale de 1 pour un institut donné, si et seulement si les étudiants affectés à cet institut sont les $Q$ \textbf{premiers} choix de ce dernier. inversement, une note de 0 est attribué si et seulement si les étudiants affectés à cet institut sont les $Q$ \textbf{derniers} choix de ses préférences. Toutes les affectations qui sont au milieu suive une fonction qui diminue linéairement. Une moyenne est calculé pour avoir une satisfaction globale de tout les instituts.
 
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width = 0.5\textwidth]{img/instituts.png}
+  \caption{Fonction priorité aux instituts pour $Q = 10$}
+\end{figure}
 
 \begin{figure}
   
