@@ -75,12 +75,10 @@ if __name__ == "__main__":
     dict_stud, dict_univ = generate_pref(n,k,rand_capacities=True)
     end = time.time()
 
-    print(f"Generation des préferences en {round(start-end,2)} secondes.")
+    print(f"Generation des préferences en {round(end-start,3)} secondes.")
 
     with open(file_name, 'w') as outfile:
-        start = time.time()
         json.dump({'students' : dict_stud, 'institutions':dict_univ}, outfile)
-        end = time.time()
     
-    print(f"File '{file_name}' generated.\ntime = {round(start-end,2)} secondes.")
+    print(f"File '{file_name}' generated.\n.")
 
