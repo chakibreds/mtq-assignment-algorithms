@@ -13,6 +13,31 @@
 % Bout de code
 \usepackage{listings}
 \usepackage{color}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -83,9 +108,7 @@ Université de Montpellier
 \end{figure}
 
 \HRule \\[0.4cm]
-{ \huge \bfseries Rapport du projet \\Conception et
-implantation d’un système d’aide
-à la décision }
+{ \huge \bfseries Rapport du projet \\Conception et implantation d’un système d’aide à la décision }
 \HRule \\[1.5cm]
 El Houiti Chakib \\
 Kezzoul Massili
@@ -95,40 +118,68 @@ Kezzoul Massili
 
 \section*{Introduction}
 
-
 \subsection*{Objectif du projet}
-L'objectif principal du projet est de réaliser une analyse critique de l'algorithme du mariage stable. Dans un premier temps l'objectif est d'implémenter l'algorithme de Gale et Shapley (mariage stable), pour l'affectation des étudiants aux institus, ensuite, de proposer une méthode de satisfaction pour les deux côtés et de tester, cet algorithme sur plusieurs jeux de données. Finalement, c'est de proposer une représentation compacte des préférences. 
 
+L'objectif principal du projet est de réaliser une analyse critique de l'algorithme du mariage stable. Dans un premier temps l'objectif est d'implémenter l'algorithme de Gale et Shapley (mariage stable), pour l'affectation des étudiants aux institus, ensuite, de proposer une méthode de satisfaction pour les deux côtés et de tester cet algorithme sur plusieurs jeux de données. Finalement, c'est de proposer une représentation compacte des préférences. 
 
 \subsection*{Environnement de développement}
+
 Le projet a été développé sur notre propre environnement de travail. On a utilisé le langage Python, pour l'implémentation des différentes fonctionnalités, en utilisant plusieurs bibliothèques propres à Python. 
 
-
 \subsection*{Structure du projet}
+
 Pour une meilleure compréhension de l’environnement du projet, voici ci-dessous différentes infor-
-mations sur les différents fichiers et répertoires du projet. 
+mations sur les différents fichiers et répertoires du projet :
 
 \begin{description}
 	\item[\textit{src/}] Répertoire contenant les fichiers sources du projet.
 	\begin{description}
-    \item[\textbf{generate.py}] Fichier pour la génération de jeux de données.
-    \item[\textbf{algorithme.py}] Fichier implémentant les différents algorithmes.
+    \item[\textbf{generate.py}] Fichier pour la génération automatique de jeux de données.
+    \item[\textbf{algorithme.py}] Fichier implémentant les différents algorithmes, notamment celui de Gale et Shapley.
     \item[\textbf{graphviz.py}] Fichier de visualisation.
-    \item[\textbf{main.py}] Fichier main du système. 
+    \item[\textbf{main.py}] Fichier contenant le programme principale du projet. 
   \end{description} 
-	\item[\textit{data/}] Répertoire contenant les différents jeux de données.
-	\begin{description}
-		\item[Jeu de données] Les \textit{fichiers.json} contiennent les données au format JSON
-	\end{description}
-		\item[\textit{output/}] Répertoire contenant toutes les sorties du programme.	
-		\item[\textit{README.md}] Fichier expliquant la manière d'utiliser le programme (initialisation, compilation et exécution). Referez-vous à la section \textit{Utilisation} de ce dernier pour plus d'informations.
-		\item[\textit{Makefile}] Fichier qui spécifient les commandes de compilation, initialisation et autres.
+	\item[\textit{data/}] Répertoire contenant les différents jeux de données de différentes tailles.
+	\item[\textit{output/}] Répertoire contenant toutes les sorties du programme.	
+	\item[\textit{README.md}] Fichier expliquant la manière d'utiliser le programme (initialisation, compilation et exécution). Referez-vous à la section \textit{Utilisation} de ce dernier pour plus d'informations.
+	\item[\textit{Makefile}] Fichier qui spécifient les commandes de compilation, initialisation et autres.
 \end{description}
 
 
 \section{Modèlisation et implémentation}
 
 \subsection{Programme de génération de préférences aléatoires}
+
+La première partie du travail est la génération de préférences aléatoires pour les étudiants ainsi que les institutions. L'objectif ici est de générer un fichier contenant ces préférences qui pourra ensuite être interpréter par un programme. Nous avons choisis de reprèsenter les préférences par un fichier \textit{JSON\footnote{JavaScript Object Notation est un format de données textuelles dérivé de la notation des objets du langage JavaScript. il permet de représenter de l’information structurée comme le permet XML par exemple.}}. En effet, ce format est très expressif et facile à manipuler.
+
+\newpage
+
+\begin{lstlisting}[language=json, caption="Exemple d'un fichier de préférences"]
+  {
+    "students": {
+        "E1": ["I3", "I1", "I2"],
+        "E2": ["I1", "I2", "I3"],
+        "E3": ["I3", "I2", "I1"]
+    },
+    "institutions": {
+        "I1": {
+            "capacities": 1,
+            "preferences": ["E1", "E2", "E3"]
+        },
+        "I2": {
+            "capacities": 1,
+            "preferences": ["E1", "E3", "E2"]
+        },
+        "I3": {
+            "capacities": 1,
+            "preferences": ["E3", "E2", "E1"]
+        }
+    }
+  }
+\end{lstlisting}
+
+
+
 Cette Partie est faite pour la génération aléatoires des préférences des étudiants et des instituts. Pour cela, on a réaliser une méthode prenant \textbf{n} étudiants et \textbf{k} instituts, qui permet de générer \textbf{n} étudiant avec \textbf{k} préférences d'instituts pour chaque étudiant, qui seront stockés dans un fichier \textit{json}, pour avoir la possibilité de générer plusieurs jeux de données. Pour les institus, on génère \textbf{k} instituts avec \textbf{n} préférences pour chaque institut et une capacité \textbf{q}. la capacité de chaque instituts est aussi générer aléatoirement, en respectant,la propriété que la somme des capacités de tout les instituts soit égale au nombre \textbf{n} d'étudiants.
 
 \subsection{Implémentation de l'algorithme du mariage stable}
