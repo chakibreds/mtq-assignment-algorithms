@@ -81,7 +81,7 @@
 %\hypersetup{pdfpagemode=FullScreen}
 
 \title[Mariage stable]{Conception et implantation d'un système d'aide à la décision}
-\author[Elhouiti, Kezzoul]{Elhouiti Chakib - Kezzoul Massili \\}
+\author[Elhouiti, Kezzoul]{Elhouiti Chakib - Kezzoul Massili }
 \institute[]{Université de Montpellier}
 \date{\today}
 
@@ -118,15 +118,18 @@
 \section{Introduction}
 
 \begin{frame}{Objectifs}
-
-\end{frame}
-
-\begin{frame}{Gale \& Shapley}
-
+    \begin{block}{}
+        \begin{itemize}
+            \item Génération des jeux de données
+            \item Implémentation de l'algorithme du mariage stable
+            \item Méthodes de satisfactions
+            \item Interface de visualisation
+            \item Représentation compacte des préférences
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 \section{Modélisation et implémentation}
-
 
 \placelogofalse
 \begin{frame}{Génération}
@@ -137,7 +140,7 @@
     
 \end{frame}
 
-\begin{frame}{Gale \& Shapley}
+\begin{frame}{Implémentation des algorithmes}
     \begin{block}{Implémentation}
         Deux versions : 
         \begin{itemize}
@@ -177,11 +180,11 @@
 
 \begin{frame}{Extension du système}
     \begin{block}<>{Random assignment}<>
-        
+        Random assignement ou affectation aléatoire, cette méthode consiste à affecter temporairement et aléatoirement un étudiant à un institut $I_i$ qui a toujours de la place, si cet étudiant $E_i$ n’a plus de choix possible dans sa liste de préférences.
     \end{block}
 
     \begin{block}<>{Les sans instituts}<>
-        
+        Contrairement à la première méthode, on traite les étudiants qui n’ont plus de choix en dernier.
     \end{block}
 \end{frame}
 
